@@ -2,12 +2,12 @@ package service;
 
 import domain.Author;
 import domain.Book;
-import domain.dto.BookReponse;
+import domain.dto.BookResponse;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import repository.AuthorRepository;
 import repository.BookRepository;
 
-import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,12 +21,12 @@ public class BookService {
     private final BookRepository bookRepository;
     private  final AuthorRepository authorRepository;
 
-    public List<BookReponse> findBooks(Pageable pageable){
+    public List<BookResponse> findBooks(Pageable pageable){
         Page<Book> books = bookRepository.findAll(pageable);
-        List<BookReponse> bookResponses = books.stream()
+        List<BookResponse> bookResponses = books.stream()
                 .map(book->{
                     Optional<Author> optionalAuthor = authorRepository.findById(book.getAuthorId());
-                    return  BookReponse.of(book,optionalAuthor.get().getName());
+                    return  BookResponse.of(book,optionalAuthor.get().getName());
                 }).collect(Collectors.toList());
         return bookResponses;
     }
