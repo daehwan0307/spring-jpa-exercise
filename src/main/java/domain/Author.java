@@ -1,4 +1,4 @@
-package entity;
+package domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
