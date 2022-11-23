@@ -1,5 +1,6 @@
 package controller;
 
+import domain.Book;
 import domain.dto.BookResponse;
 import lombok.Getter;
 import org.springframework.data.domain.Page;
@@ -7,6 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import service.BookService;
 
@@ -25,6 +27,13 @@ public class BookRestController {
     public ResponseEntity<List<BookResponse>> list(Pageable pageable){
         return ResponseEntity.ok().body(bookService.findBooks(pageable));
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Book> get(@PathVariable Long id){
+        return ResponseEntity.ok().body(new Book());
+    }
+
+
 
 
 
